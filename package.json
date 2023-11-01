@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "npx concurrently \"npm run dev:build\" \"npm run dev:run\"",
     "dev:build": "npx swc ./src -d ./dist --watch --log-watch-compilation",
-    "dev:run": "npx chokidar \"dist/**/*.js\" --initial --command \"pkill --full --echo --exact 'node dist/main.js'; node dist/main.js\"",
+    "dev:run": "npx chokidar \"dist/**/*.js\" --initial --command \"pkill -xfl 'node dist/main.js'; node dist/main.js\"",
     "build": "npx swc ./src -d ./dist"
   },
   "dependencies": {
@@ -17,7 +17,9 @@
     "@grpc/proto-loader": "^0.7.10",
     "dockerode": "^4.0.0",
     "google-proto-files": "^4.0.0",
-    "pino": "^8.16.1"
+    "pino": "^8.16.1",
+    "yaml": "^2.3.3",
+    "yargs-parser": "^21.1.1"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.62",

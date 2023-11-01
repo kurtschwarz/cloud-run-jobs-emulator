@@ -1,11 +1,19 @@
 import { Server, ServerCredentials, ServiceDefinition, UntypedServiceImplementation } from '@grpc/grpc-js'
 
-import { getLogger } from '@services/logger'
+import { getLogger } from '@utils/logger'
+import { getConfig } from '@utils/config'
 import { jobsServiceDefinitions, JobsService } from '@services/jobs-service'
 
 !(async () => {
+  const config = getConfig()
   const logger = getLogger()
   const server = new Server()
+
+  logger.info('starting gRPC server ...')
+
+  if (Object.keys(config.jobs)?.length === 0) {
+    logger.warn({}, 'no jobs defined in config')
+  }
 
   server.addService(
     // GrpcObject does not like the nested namespace
@@ -13,11 +21,9 @@ import { jobsServiceDefinitions, JobsService } from '@services/jobs-service'
     JobsService,
   )
 
-  logger.info('starting gRPC server ...')
-
   try {
     const port = await new Promise((resolve, reject) => {
-      server.bindAsync(`0.0.0.0:${process.env.PORT ?? '8123'}`, ServerCredentials.createInsecure(), (err, port) => {
+      server.bindAsync(`${config.host}:${config.port}`, ServerCredentials.createInsecure(), (err, port) => {
         if (err) {
           return reject(err)
         }
@@ -28,7 +34,7 @@ import { jobsServiceDefinitions, JobsService } from '@services/jobs-service'
 
     server.start()
 
-    logger.info({ port }, `⚡ up and running on 0.0.0.0:${port}`)
+    logger.info({ address: `${config.host}:${port}` }, `⚡ up and running on ${config.host}:${port}`)
   } catch (err) {
     logger.error({ err }, `failed to start gRPC server`)
     process.exit(1)
