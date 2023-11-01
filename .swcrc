@@ -1,0 +1,22 @@
+{
+  "minify": true,
+  "jsc": {
+    "baseUrl": "src/",
+    "paths": {
+      "@clients/*": ["clients/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"]
+    },
+    "parser": {
+      "syntax": "typescript"
+    },
+    "target": "es2021",
+    "minify": {
+      "compress": true,
+      "mangle": true
+    }
+  },
+  "module": {
+    "type": "commonjs"
+  }
+}
