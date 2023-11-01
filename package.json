@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "npx concurrently \"npm run dev:build\" \"npm run dev:run\"",
     "dev:build": "npx swc ./src -d ./dist --watch --log-watch-compilation",
-    "dev:run": "npx chokidar \"dist/**/*.js\" --command \"pkill --full --echo --exact 'node dist/main.js'; node dist/main.js\"",
+    "dev:run": "npx chokidar \"dist/**/*.js\" --initial --command \"pkill --full --echo --exact 'node dist/main.js'; node dist/main.js\"",
     "build": "npx swc ./src -d ./dist"
   },
   "dependencies": {
