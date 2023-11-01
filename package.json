@@ -1,6 +1,10 @@
 {
   "name": "cloud-run-jobs-emulator",
   "version": "0.0.0",
+  "engines": {
+    "node": ">=21",
+    "npm": ">=10"
+  },
   "scripts": {
     "dev": "npx concurrently \"pnpm run dev:build\" \"pnpm run dev:run\"",
     "dev:build": "npx swc ./src -d ./dist --watch --log-watch-compilation",
