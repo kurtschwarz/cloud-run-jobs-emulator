@@ -46,4 +46,7 @@ dev *FLAGS: (env-check)
     --env SHELL=/bin/sh \
     --env CHOKIDAR_USEPOLLING=true \
     --volume ./src:/cloud-run-jobs-emulator/src/ \
+    --volume ./example/cloud-run-jobs-config.yaml:/cloud-run-jobs-config.yaml \
+    --volume /var/run/docker.sock:/var/run/docker.sock \
+    --publish 8123:8123 \
     {{docker-image-name}}:dev

@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "npx concurrently \"npm run dev:build\" \"npm run dev:run\"",
     "dev:build": "npx swc ./src -d ./dist --watch --log-watch-compilation",
-    "dev:run": "npx chokidar \"dist/**/*.js\" --initial --command \"pkill -xfl 'node dist/main.js'; node dist/main.js\"",
+    "dev:run": "npx chokidar \"dist/**/*.js\" --initial --command \"pkill -xf 'node dist/main.js --config /cloud-run-jobs-config.yaml'; node dist/main.js --config /cloud-run-jobs-config.yaml\"",
     "build": "npx swc ./src -d ./dist",
     "test": "npx jest"
   },

@@ -1,11 +1,13 @@
 import pino from 'pino'
 
 export enum Logger {
+  Job = 'job',
   Default = 'default'
 }
 
 const levels = new Map<Logger, string>([
-  [Logger.Default, 'info']
+  [Logger.Job, 'info'],
+  [Logger.Default, 'info'],
 ])
 
 const loggers = new Map<Logger, pino.Logger>([])
@@ -14,7 +16,7 @@ export const getLogger = (name: Logger = Logger.Default, base: { [key: string]: 
   if (loggers.has(name)) {
     return loggers.get(name)
   }
-  
+
   const logger = pino({
     name,
     base,

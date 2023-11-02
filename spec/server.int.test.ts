@@ -2,7 +2,7 @@ import { Server } from '@grpc/grpc-js'
 import { v2 } from '@google-cloud/run'
 
 import { initializeServer, shutdownServer, startServer } from '../src/server'
-import { docker } from '../src/clients/docker'
+import { docker } from '../src/utils/docker'
 import { Config, getConfig } from '../src/utils/config'
 import { getLogger } from '@utils/logger'
 
